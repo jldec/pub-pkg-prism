@@ -4,6 +4,30 @@
 
 Runs inside pub-generator during markdown processing -- no client-side javascript required.
 
+Includes language support for the prism defaults HTML/XML, css, c-like, as well as the following:
+- javascript
+- c
+- bash
+- cpp
+- clojure
+- ruby
+- docker
+- markup-templating
+- go
+- handlebars
+- java
+- markdown
+- lua
+- makefile
+- php
+- powershell
+- protobuf
+- python
+- r
+- jsx
+- rust
+- swift
+
 ### installation
 
 1. `npm install --save pub-pkg-prism`
