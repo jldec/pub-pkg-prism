@@ -35,7 +35,7 @@ Includes language support for the prism defaults HTML/XML, css, c-like, as well 
 
 ### usage
 
-Markdown code blocks will be automatically highlighted by pub-generator using [marked](https://github.com/chjj/marked#options-1), synchronously calling prism.hightlight().
+Markdown code blocks will be automatically highlighted by pub-generator using [marked](https://marked.js.org/#/USING_ADVANCED.md#options), synchronously calling prism.hightlight().
 
 ## CSS
 

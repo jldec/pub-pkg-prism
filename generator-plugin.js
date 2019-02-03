@@ -1,8 +1,5 @@
 /*
- * lodash-doc pub-generator plugin
- *
- * mostly copied from https://github.com/jdalton/docdown
- * copyright 2011-2015 John-David Dalton <http://allyoucanleet.com/>
+ * pub-pkg-prism pub-generator plugin
 */
 
 var Prism = require('./js/prism.js');
@@ -10,7 +7,7 @@ var Prism = require('./js/prism.js');
 module.exports = function(generator) {
   var opts = generator.opts;
 
-  // api matches https://github.com/chjj/marked#options-1
+  // api matches https://marked.js.org/#/USING_ADVANCED.md#options
   opts.highlight = function(code, lang) {
     grammar = Prism.languages[lang];
     return grammar ? Prism.highlight(code, grammar, lang) : code;
