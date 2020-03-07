@@ -1,6 +1,6 @@
 {
   "name": "pub-pkg-prism",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "pub-server plugin for prism.js syntax highlighting",
   "main": "pub-config.js",
   "dependencies": {},
@@ -8,7 +8,8 @@
     "css/",
     "js/",
     "generator-plugin.js",
-    "pub-config.js"
+    "pub-config.js",
+    "LICENSE-PRISM"
   ],
   "keywords": [
     "publish",
@@ -20,6 +21,6 @@
     "type": "git",
     "url": "git://github.com/jldec/pub-pkg-prism.git"
   },
-  "author": "jurgen leschner",
+  "author": "Jürgen Leschner",
   "license": "MIT"
 }

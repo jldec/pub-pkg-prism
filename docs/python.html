@@ -24,7 +24,7 @@
 <div id="doctitle"><h1 id="pub-pkg-prism"><a href="./">pub-pkg-prism</a></h1>
 </div>
 <div id="topmenu"><ul>
-<li><a href="https://github.com/jldec/pub-pkg-prism" title="github" target="_blank"><span class="fa fa-lg fa-fw">&#xf09b;</span></a></li>
+<li><a href="https://github.com/jldec/pub-pkg-prism" title="github" target="_blank" rel="noopener"><span class="fa fa-lg fa-fw">&#xf09b;</span></a></li>
 </ul>
 </div>
 </header>
@@ -45,68 +45,68 @@
 <div id="main" onclick="">
 <div id="content" class="markdown-body">
 <div data-render-page="default"><div data-render-html="/python"><h3 id="python">Python</h3>
-<pre><code class="language-python"><span class="token comment"># Copyright 2015 gRPC authors.</span>
-<span class="token comment">#</span>
-<span class="token comment"># Licensed under the Apache License, Version 2.0 (the "License");</span>
-<span class="token comment"># you may not use this file except in compliance with the License.</span>
-<span class="token comment"># You may obtain a copy of the License at</span>
-<span class="token comment">#</span>
-<span class="token comment">#     http://www.apache.org/licenses/LICENSE-2.0</span>
-<span class="token comment">#</span>
-<span class="token comment"># Unless required by applicable law or agreed to in writing, software</span>
-<span class="token comment"># distributed under the License is distributed on an "AS IS" BASIS,</span>
-<span class="token comment"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
-<span class="token comment"># See the License for the specific language governing permissions and</span>
-<span class="token comment"># limitations under the License.</span>
-<span class="token triple-quoted-string string">"""The base interface of RPC Framework.
+<pre><code class="language-python"># Copyright 2015 gRPC authors.
+#
+# Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+&quot;&quot;&quot;The base interface of RPC Framework.
 
-Implementations of this interface support the conduct of "operations":
+Implementations of this interface support the conduct of &quot;operations&quot;:
 exchanges between two distinct ends of an arbitrary number of data payloads
 and metadata such as a name for the operation, initial and terminal metadata
 in each direction, and flow control. These operations may be used for transfers
 of data, remote procedure calls, status indication, or anything else
 applications choose.
-"""</span>
+&quot;&quot;&quot;
 
-<span class="token comment"># threading is referenced from specification in this module.</span>
-<span class="token keyword">import</span> abc
-<span class="token keyword">import</span> enum
-<span class="token keyword">import</span> threading  <span class="token comment"># pylint: disable=unused-import</span>
+# threading is referenced from specification in this module.
+import abc
+import enum
+import threading  # pylint: disable=unused-import
 
-<span class="token keyword">import</span> six
+import six
 
-<span class="token comment"># abandonment is referenced from specification in this module.</span>
-<span class="token keyword">from</span> grpc<span class="token punctuation">.</span>framework<span class="token punctuation">.</span>foundation <span class="token keyword">import</span> abandonment  <span class="token comment"># pylint: disable=unused-import</span>
+# abandonment is referenced from specification in this module.
+from grpc.framework.foundation import abandonment  # pylint: disable=unused-import
 
-<span class="token comment"># pylint: disable=too-many-arguments</span>
+# pylint: disable=too-many-arguments
 
 
-<span class="token keyword">class</span> <span class="token class-name">NoSuchMethodError</span><span class="token punctuation">(</span>Exception<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token triple-quoted-string string">"""Indicates that an unrecognized operation has been called.
+class NoSuchMethodError(Exception):
+    &quot;&quot;&quot;Indicates that an unrecognized operation has been called.
 
     Attributes:
       code: A code value to communicate to the other side of the operation
         along with indication of operation termination. May be None.
       details: A details value to communicate to the other side of the
         operation along with indication of operation termination. May be None.
-    """</span>
+    &quot;&quot;&quot;
 
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> code<span class="token punctuation">,</span> details<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">"""Constructor.
+    def __init__(self, code, details):
+        &quot;&quot;&quot;Constructor.
 
         Args:
           code: A code value to communicate to the other side of the operation
             along with indication of operation termination. May be None.
           details: A details value to communicate to the other side of the
             operation along with indication of operation termination. May be None.
-        """</span>
-        <span class="token builtin">super</span><span class="token punctuation">(</span>NoSuchMethodError<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>code <span class="token operator">=</span> code
-        self<span class="token punctuation">.</span>details <span class="token operator">=</span> details
+        &quot;&quot;&quot;
+        super(NoSuchMethodError, self).__init__()
+        self.code = code
+        self.details = details
 
 
-<span class="token keyword">class</span> <span class="token class-name">Outcome</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token triple-quoted-string string">"""The outcome of an operation.
+class Outcome(object):
+    &quot;&quot;&quot;The outcome of an operation.
 
   Attributes:
     kind: A Kind value coarsely identifying how the operation terminated.
@@ -114,49 +114,49 @@ applications choose.
       provided.
     details: An application-specific details value or None if no such value was
       provided.
-  """</span>
+  &quot;&quot;&quot;
 
-    <span class="token decorator annotation punctuation">@enum<span class="token punctuation">.</span>unique</span>
-    <span class="token keyword">class</span> <span class="token class-name">Kind</span><span class="token punctuation">(</span>enum<span class="token punctuation">.</span>Enum<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">"""Ways in which an operation can terminate."""</span>
+    @enum.unique
+    class Kind(enum.Enum):
+        &quot;&quot;&quot;Ways in which an operation can terminate.&quot;&quot;&quot;
 
-        COMPLETED <span class="token operator">=</span> <span class="token string">'completed'</span>
-        CANCELLED <span class="token operator">=</span> <span class="token string">'cancelled'</span>
-        EXPIRED <span class="token operator">=</span> <span class="token string">'expired'</span>
-        LOCAL_SHUTDOWN <span class="token operator">=</span> <span class="token string">'local shutdown'</span>
-        REMOTE_SHUTDOWN <span class="token operator">=</span> <span class="token string">'remote shutdown'</span>
-        RECEPTION_FAILURE <span class="token operator">=</span> <span class="token string">'reception failure'</span>
-        TRANSMISSION_FAILURE <span class="token operator">=</span> <span class="token string">'transmission failure'</span>
-        LOCAL_FAILURE <span class="token operator">=</span> <span class="token string">'local failure'</span>
-        REMOTE_FAILURE <span class="token operator">=</span> <span class="token string">'remote failure'</span>
+        COMPLETED = &#39;completed&#39;
+        CANCELLED = &#39;cancelled&#39;
+        EXPIRED = &#39;expired&#39;
+        LOCAL_SHUTDOWN = &#39;local shutdown&#39;
+        REMOTE_SHUTDOWN = &#39;remote shutdown&#39;
+        RECEPTION_FAILURE = &#39;reception failure&#39;
+        TRANSMISSION_FAILURE = &#39;transmission failure&#39;
+        LOCAL_FAILURE = &#39;local failure&#39;
+        REMOTE_FAILURE = &#39;remote failure&#39;
 
 
-<span class="token keyword">class</span> <span class="token class-name">Completion</span><span class="token punctuation">(</span>six<span class="token punctuation">.</span>with_metaclass<span class="token punctuation">(</span>abc<span class="token punctuation">.</span>ABCMeta<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token triple-quoted-string string">"""An aggregate of the values exchanged upon operation completion.
+class Completion(six.with_metaclass(abc.ABCMeta)):
+    &quot;&quot;&quot;An aggregate of the values exchanged upon operation completion.
 
   Attributes:
     terminal_metadata: A terminal metadata value for the operaton.
     code: A code value for the operation.
     message: A message value for the operation.
-  """</span>
+  &quot;&quot;&quot;
 
 
-<span class="token keyword">class</span> <span class="token class-name">OperationContext</span><span class="token punctuation">(</span>six<span class="token punctuation">.</span>with_metaclass<span class="token punctuation">(</span>abc<span class="token punctuation">.</span>ABCMeta<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token triple-quoted-string string">"""Provides operation-related information and action."""</span>
+class OperationContext(six.with_metaclass(abc.ABCMeta)):
+    &quot;&quot;&quot;Provides operation-related information and action.&quot;&quot;&quot;
 
-    <span class="token decorator annotation punctuation">@abc<span class="token punctuation">.</span>abstractmethod</span>
-    <span class="token keyword">def</span> <span class="token function">outcome</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">"""Indicates the operation's outcome (or that the operation is ongoing).
+    @abc.abstractmethod
+    def outcome(self):
+        &quot;&quot;&quot;Indicates the operation&#39;s outcome (or that the operation is ongoing).
 
     Returns:
       None if the operation is still active or the Outcome value for the
         operation if it has terminated.
-    """</span>
-        <span class="token keyword">raise</span> NotImplementedError<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    &quot;&quot;&quot;
+        raise NotImplementedError()
 
-    @abc<span class="token punctuation">.</span>abstractmethod
-    <span class="token keyword">def</span> <span class="token function">add_termination_callback</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> callback<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">"""Adds a function to be called upon operation termination.
+    @abc.abstractmethod
+    def add_termination_callback(self, callback):
+        &quot;&quot;&quot;Adds a function to be called upon operation termination.
 
     Args:
       callback: A callable to be passed an Outcome value on operation
@@ -167,45 +167,45 @@ applications choose.
         later be called when it does terminate, or if the operation has already
         terminated an Outcome value describing the operation termination and the
         passed callback will not be called as a result of this method call.
-    """</span>
-        <span class="token keyword">raise</span> NotImplementedError<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    &quot;&quot;&quot;
+        raise NotImplementedError()
 
-    @abc<span class="token punctuation">.</span>abstractmethod
-    <span class="token keyword">def</span> <span class="token function">time_remaining</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">"""Describes the length of allowed time remaining for the operation.
+    @abc.abstractmethod
+    def time_remaining(self):
+        &quot;&quot;&quot;Describes the length of allowed time remaining for the operation.
 
     Returns:
       A nonnegative float indicating the length of allowed time in seconds
       remaining for the operation to complete before it is considered to have
       timed out. Zero is returned if the operation has terminated.
-    """</span>
-        <span class="token keyword">raise</span> NotImplementedError<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    &quot;&quot;&quot;
+        raise NotImplementedError()
 
-    @abc<span class="token punctuation">.</span>abstractmethod
-    <span class="token keyword">def</span> <span class="token function">cancel</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">"""Cancels the operation if the operation has not yet terminated."""</span>
-        <span class="token keyword">raise</span> NotImplementedError<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    @abc.abstractmethod
+    def cancel(self):
+        &quot;&quot;&quot;Cancels the operation if the operation has not yet terminated.&quot;&quot;&quot;
+        raise NotImplementedError()
 
-    @abc<span class="token punctuation">.</span>abstractmethod
-    <span class="token keyword">def</span> <span class="token function">fail</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> exception<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">"""Indicates that the operation has failed.
+    @abc.abstractmethod
+    def fail(self, exception):
+        &quot;&quot;&quot;Indicates that the operation has failed.
 
     Args:
       exception: An exception germane to the operation failure. May be None.
-    """</span>
-        <span class="token keyword">raise</span> NotImplementedError<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    &quot;&quot;&quot;
+        raise NotImplementedError()
 
 
-<span class="token keyword">class</span> <span class="token class-name">Operator</span><span class="token punctuation">(</span>six<span class="token punctuation">.</span>with_metaclass<span class="token punctuation">(</span>abc<span class="token punctuation">.</span>ABCMeta<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token triple-quoted-string string">"""An interface through which to participate in an operation."""</span>
+class Operator(six.with_metaclass(abc.ABCMeta)):
+    &quot;&quot;&quot;An interface through which to participate in an operation.&quot;&quot;&quot;
 
-    <span class="token decorator annotation punctuation">@abc<span class="token punctuation">.</span>abstractmethod</span>
-    <span class="token keyword">def</span> <span class="token function">advance</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>
-                initial_metadata<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span>
-                payload<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span>
-                completion<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span>
-                allowance<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">"""Progresses the operation.
+    @abc.abstractmethod
+    def advance(self,
+                initial_metadata=None,
+                payload=None,
+                completion=None,
+                allowance=None):
+        &quot;&quot;&quot;Progresses the operation.
 
     Args:
       initial_metadata: An initial metadata value. Only one may ever be
@@ -216,25 +216,25 @@ applications choose.
         direction, and no payloads may be passed after it has been communicated.
       allowance: A positive integer communicating the number of additional
         payloads allowed to be passed by the remote side of the operation.
-    """</span>
-        <span class="token keyword">raise</span> NotImplementedError<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    &quot;&quot;&quot;
+        raise NotImplementedError()
 
 
-<span class="token keyword">class</span> <span class="token class-name">ProtocolReceiver</span><span class="token punctuation">(</span>six<span class="token punctuation">.</span>with_metaclass<span class="token punctuation">(</span>abc<span class="token punctuation">.</span>ABCMeta<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token triple-quoted-string string">"""A means of receiving protocol values during an operation."""</span>
+class ProtocolReceiver(six.with_metaclass(abc.ABCMeta)):
+    &quot;&quot;&quot;A means of receiving protocol values during an operation.&quot;&quot;&quot;
 
-    <span class="token decorator annotation punctuation">@abc<span class="token punctuation">.</span>abstractmethod</span>
-    <span class="token keyword">def</span> <span class="token function">context</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> protocol_context<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">"""Accepts the protocol context object for the operation.
+    @abc.abstractmethod
+    def context(self, protocol_context):
+        &quot;&quot;&quot;Accepts the protocol context object for the operation.
 
     Args:
       protocol_context: The protocol context object for the operation.
-    """</span>
-        <span class="token keyword">raise</span> NotImplementedError<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    &quot;&quot;&quot;
+        raise NotImplementedError()
 
 
-<span class="token keyword">class</span> <span class="token class-name">Subscription</span><span class="token punctuation">(</span>six<span class="token punctuation">.</span>with_metaclass<span class="token punctuation">(</span>abc<span class="token punctuation">.</span>ABCMeta<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token triple-quoted-string string">"""Describes customer code's interest in values from the other side.
+class Subscription(six.with_metaclass(abc.ABCMeta)):
+    &quot;&quot;&quot;Describes customer code&#39;s interest in values from the other side.
 
   Attributes:
     kind: A Kind value describing the overall kind of this value.
@@ -250,22 +250,22 @@ applications choose.
     protocol_receiver: A ProtocolReceiver to be passed protocol objects as they
       become available during the operation. Must be non-None if kind is
       Kind.FULL.
-  """</span>
+  &quot;&quot;&quot;
 
-    <span class="token decorator annotation punctuation">@enum<span class="token punctuation">.</span>unique</span>
-    <span class="token keyword">class</span> <span class="token class-name">Kind</span><span class="token punctuation">(</span>enum<span class="token punctuation">.</span>Enum<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    @enum.unique
+    class Kind(enum.Enum):
 
-        NONE <span class="token operator">=</span> <span class="token string">'none'</span>
-        TERMINATION_ONLY <span class="token operator">=</span> <span class="token string">'termination only'</span>
-        FULL <span class="token operator">=</span> <span class="token string">'full'</span>
+        NONE = &#39;none&#39;
+        TERMINATION_ONLY = &#39;termination only&#39;
+        FULL = &#39;full&#39;
 
 
-<span class="token keyword">class</span> <span class="token class-name">Servicer</span><span class="token punctuation">(</span>six<span class="token punctuation">.</span>with_metaclass<span class="token punctuation">(</span>abc<span class="token punctuation">.</span>ABCMeta<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token triple-quoted-string string">"""Interface for service implementations."""</span>
+class Servicer(six.with_metaclass(abc.ABCMeta)):
+    &quot;&quot;&quot;Interface for service implementations.&quot;&quot;&quot;
 
-    <span class="token decorator annotation punctuation">@abc<span class="token punctuation">.</span>abstractmethod</span>
-    <span class="token keyword">def</span> <span class="token function">service</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> group<span class="token punctuation">,</span> method<span class="token punctuation">,</span> context<span class="token punctuation">,</span> output_operator<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">"""Services an operation.
+    @abc.abstractmethod
+    def service(self, group, method, context, output_operator):
+        &quot;&quot;&quot;Services an operation.
 
     Args:
       group: The group identifier of the operation to be serviced.
@@ -284,21 +284,21 @@ applications choose.
         given group and method.
       abandonment.Abandoned: If the operation has been aborted and there no
         longer is any reason to service the operation.
-    """</span>
-        <span class="token keyword">raise</span> NotImplementedError<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    &quot;&quot;&quot;
+        raise NotImplementedError()
 
 
-<span class="token keyword">class</span> <span class="token class-name">End</span><span class="token punctuation">(</span>six<span class="token punctuation">.</span>with_metaclass<span class="token punctuation">(</span>abc<span class="token punctuation">.</span>ABCMeta<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token triple-quoted-string string">"""Common type for entry-point objects on both sides of an operation."""</span>
+class End(six.with_metaclass(abc.ABCMeta)):
+    &quot;&quot;&quot;Common type for entry-point objects on both sides of an operation.&quot;&quot;&quot;
 
-    <span class="token decorator annotation punctuation">@abc<span class="token punctuation">.</span>abstractmethod</span>
-    <span class="token keyword">def</span> <span class="token function">start</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">"""Starts this object's service of operations."""</span>
-        <span class="token keyword">raise</span> NotImplementedError<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    @abc.abstractmethod
+    def start(self):
+        &quot;&quot;&quot;Starts this object&#39;s service of operations.&quot;&quot;&quot;
+        raise NotImplementedError()
 
-    @abc<span class="token punctuation">.</span>abstractmethod
-    <span class="token keyword">def</span> <span class="token function">stop</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> grace<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">"""Stops this object's service of operations.
+    @abc.abstractmethod
+    def stop(self, grace):
+        &quot;&quot;&quot;Stops this object&#39;s service of operations.
 
     This object will refuse service of new operations as soon as this method is
     called but operations under way at the time of the call may be given a
@@ -317,20 +317,20 @@ applications choose.
         operation continues for the full length of the period) or it may be set
         much sooner (if for example this End had no operations in progress at
         the time its stop method was called).
-    """</span>
-        <span class="token keyword">raise</span> NotImplementedError<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    &quot;&quot;&quot;
+        raise NotImplementedError()
 
-    @abc<span class="token punctuation">.</span>abstractmethod
-    <span class="token keyword">def</span> <span class="token function">operate</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>
-                group<span class="token punctuation">,</span>
-                method<span class="token punctuation">,</span>
-                subscription<span class="token punctuation">,</span>
-                timeout<span class="token punctuation">,</span>
-                initial_metadata<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span>
-                payload<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span>
-                completion<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span>
-                protocol_options<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">"""Commences an operation.
+    @abc.abstractmethod
+    def operate(self,
+                group,
+                method,
+                subscription,
+                timeout,
+                initial_metadata=None,
+                payload=None,
+                completion=None,
+                protocol_options=None):
+        &quot;&quot;&quot;Commences an operation.
 
     Args:
       group: The group identifier of the invoked operation.
@@ -354,31 +354,31 @@ applications choose.
         OperationContext for the operation and the second element of the
         returned pair is an Operator to which operation values not passed in
         this call should later be passed.
-    """</span>
-        <span class="token keyword">raise</span> NotImplementedError<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    &quot;&quot;&quot;
+        raise NotImplementedError()
 
-    @abc<span class="token punctuation">.</span>abstractmethod
-    <span class="token keyword">def</span> <span class="token function">operation_stats</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">"""Reports the number of terminated operations broken down by outcome.
+    @abc.abstractmethod
+    def operation_stats(self):
+        &quot;&quot;&quot;Reports the number of terminated operations broken down by outcome.
 
     Returns:
       A dictionary from Outcome.Kind value to an integer identifying the number
         of operations that terminated with that outcome kind.
-    """</span>
-        <span class="token keyword">raise</span> NotImplementedError<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    &quot;&quot;&quot;
+        raise NotImplementedError()
 
-    @abc<span class="token punctuation">.</span>abstractmethod
-    <span class="token keyword">def</span> <span class="token function">add_idle_action</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> action<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token triple-quoted-string string">"""Adds an action to be called when this End has no ongoing operations.
+    @abc.abstractmethod
+    def add_idle_action(self, action):
+        &quot;&quot;&quot;Adds an action to be called when this End has no ongoing operations.
 
     Args:
       action: A callable that accepts no arguments.
-    """</span>
-        <span class="token keyword">raise</span> NotImplementedError<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+    &quot;&quot;&quot;
+        raise NotImplementedError()</code></pre>
 </div>
 </div>
 </div>
-<div id="credit"><p><span class="fa">&#xf004;</span> powered by <a href="https://jldec.github.io/pub-doc/" target="_blank">pub-server</a> and <a href="https://github.com/jldec/pub-theme-doc" target="_blank">pub-theme-doc</a></p>
+<div id="credit"><p><span class="fa">&#xf004;</span> powered by <a href="https://jldec.github.io/pub-doc/" target="_blank" rel="noopener">pub-server</a> and <a href="https://github.com/jldec/pub-theme-doc" target="_blank" rel="noopener">pub-theme-doc</a></p>
 </div>
 </div>
 </div>
@@ -386,6 +386,6 @@ applications choose.
 <script>window.pubRef = {"href":"/python","relPath":"."};</script>
 <script src="./js/jquery-1.12.4.min.js" ></script>
 <script src="./pub/pub-ux.js" ></script>
-<!-- Copyright (c) 2015-2019 Jürgen Leschner - github.com/jldec - MIT license -->
+<!-- Copyright (c) 2015-2020 Jürgen Leschner - github.com/jldec - MIT license -->
 </body>
 </html>

@@ -4,30 +4,28 @@
 
 Runs inside pub-generator during markdown processing -- no client-side javascript required.
 
-Includes language support for the prism defaults HTML/XML, css, c-like, as well as the following:
+Includes language support for the prism defaults HTML/XML, css, c-like, as well as
 
-- JavasSript
+- Markup
+- JavaScript
 - C
-- Bash
+- C#
 - Cpp
 - Clojure
-- Ruby
 - Docker
-- Markup-templating
+- F#
 - Go
-- Handlebars
-- Java
-- Markdown
+- Haskell
+- Json
 - Lua
 - Makefile
-- PHP
-- Powershell
-- Protobuf
+- Perl
 - Python
 - R
-- JSX
 - Rust
+- Sql
 - Swift
+- WASM
 
 A website with some examples can be found at https://jldec.github.io/pub-pkg-prism
 

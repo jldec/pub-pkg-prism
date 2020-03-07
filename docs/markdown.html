@@ -24,7 +24,7 @@
 <div id="doctitle"><h1 id="pub-pkg-prism"><a href="./">pub-pkg-prism</a></h1>
 </div>
 <div id="topmenu"><ul>
-<li><a href="https://github.com/jldec/pub-pkg-prism" title="github" target="_blank"><span class="fa fa-lg fa-fw">&#xf09b;</span></a></li>
+<li><a href="https://github.com/jldec/pub-pkg-prism" title="github" target="_blank" rel="noopener"><span class="fa fa-lg fa-fw">&#xf09b;</span></a></li>
 </ul>
 </div>
 </header>
@@ -46,11 +46,11 @@
 <div id="content" class="markdown-body">
 <div data-render-page="default"><div data-render-html="/markdown"><h3 id="markdown">Markdown</h3>
 <pre><code class="language-markdown"><span class="token title important"><span class="token punctuation">###</span> tl;dr</span>
-All text-content lives in <span class="token bold"><span class="token punctuation">**</span>markdown<span class="token punctuation">**</span></span> fragments inside <span class="token bold"><span class="token punctuation">**</span>text<span class="token punctuation">**</span></span> files in one or more <span class="token bold"><span class="token punctuation">**</span>sources<span class="token punctuation">**</span></span>. Fragments in the same file are separated by a delimiter like
+All text-content lives in <span class="token bold"><span class="token punctuation">**</span><span class="token content">markdown</span><span class="token punctuation">**</span></span> fragments inside <span class="token bold"><span class="token punctuation">**</span><span class="token content">text</span><span class="token punctuation">**</span></span> files in one or more <span class="token bold"><span class="token punctuation">**</span><span class="token content">sources</span><span class="token punctuation">**</span></span>. Fragments in the same file are separated by a delimiter like
 
 <span class="token code keyword">    ---- /page-1 ----</span>
 
-<span class="token bold"><span class="token punctuation">**</span>pub-generator<span class="token punctuation">**</span></span> compiles markdown fragments into javascript objects which are rendered to HTML by applying <span class="token bold"><span class="token punctuation">**</span>handlebars templates<span class="token punctuation">**</span></span>.
+<span class="token bold"><span class="token punctuation">**</span><span class="token content">pub-generator</span><span class="token punctuation">**</span></span> compiles markdown fragments into javascript objects which are rendered to HTML by applying <span class="token bold"><span class="token punctuation">**</span><span class="token content">handlebars templates</span><span class="token punctuation">**</span></span>.
 
 
 <span class="token title important"><span class="token punctuation">###</span> sources</span>
@@ -72,8 +72,8 @@ Handlebars templates live in files in sources just like markdown text. In fact, 
 <span class="token title important"><span class="token punctuation">###</span> pages and fragments</span>
 There are 2 kinds of markdown content:
 
-<span class="token list punctuation">1.</span> <span class="token bold"><span class="token punctuation">**</span>pages<span class="token punctuation">**</span></span> have a "normal" page url or href. e.g. <span class="token code keyword">`/pages/about-us`</span>
-<span class="token list punctuation">2.</span> <span class="token bold"><span class="token punctuation">**</span>fragments<span class="token punctuation">**</span></span> have an href with a fragment #id. e.g. <span class="token code keyword">`/blog/2014/year-in-review#conclusions`</span>
+<span class="token list punctuation">1.</span> <span class="token bold"><span class="token punctuation">**</span><span class="token content">pages</span><span class="token punctuation">**</span></span> have a "normal" page url or href. e.g. <span class="token code keyword">`/pages/about-us`</span>
+<span class="token list punctuation">2.</span> <span class="token bold"><span class="token punctuation">**</span><span class="token content">fragments</span><span class="token punctuation">**</span></span> have an href with a fragment #id. e.g. <span class="token code keyword">`/blog/2014/year-in-review#conclusions`</span>
 
 The href may be specified in a header at the top of the markdown like the examples above or derived from the source path: E.g. a file <span class="token code keyword">`/md/pages/About Us.md`</span> may become <span class="token code keyword">`/pages/about-us`</span> assuming <span class="token code keyword">`/md`</span> is the source.
 
@@ -81,8 +81,8 @@ Filenames are turned into urls by slugifying i.e. lowercasing and converting non
 
 In addition to having an href, all pages and fragments may acquire additional metadata from their markdown headers. E.g to set a title for the home page, add the following at the top of the index.md file.
 
-<span class="token code keyword">    ---- / ----</span>
-<span class="token code keyword">    title: Introduction</span>
+<span class="token code keyword">    ---- / ----
+    title: Introduction</span>
 
 <span class="token code keyword">    **pub-server** is a lightweight content management tool for publishing on the web</span>
 
@@ -103,17 +103,17 @@ Templates may be explicitly specified. E.g. to use an outer template called <spa
 <span class="token title important"><span class="token punctuation">###</span> loading</span>
 Before rendering (or every time a source is modified) the generator does:
 
-<span class="token list punctuation">-</span> <span class="token italic"><span class="token punctuation">*</span>read<span class="token punctuation">*</span></span> text files in order from all (or just the modified) sources
-<span class="token list punctuation">-</span> <span class="token italic"><span class="token punctuation">*</span>pre-process<span class="token punctuation">*</span></span> each file into one or more fragments
-<span class="token list punctuation">-</span> <span class="token italic"><span class="token punctuation">*</span>compile<span class="token punctuation">*</span></span> .md fragments into arrays of javascript objects
-<span class="token list punctuation">-</span> <span class="token italic"><span class="token punctuation">*</span>compile<span class="token punctuation">*</span></span> .hbs fragments into handlebars templates
-<span class="token list punctuation">-</span> <span class="token italic"><span class="token punctuation">*</span>emit<span class="token punctuation">*</span></span> events which can trigger additional processing by plugins
+<span class="token list punctuation">-</span> <span class="token italic"><span class="token punctuation">*</span><span class="token content">read</span><span class="token punctuation">*</span></span> text files in order from all (or just the modified) sources
+<span class="token list punctuation">-</span> <span class="token italic"><span class="token punctuation">*</span><span class="token content">pre-process</span><span class="token punctuation">*</span></span> each file into one or more fragments
+<span class="token list punctuation">-</span> <span class="token italic"><span class="token punctuation">*</span><span class="token content">compile</span><span class="token punctuation">*</span></span> .md fragments into arrays of javascript objects
+<span class="token list punctuation">-</span> <span class="token italic"><span class="token punctuation">*</span><span class="token content">compile</span><span class="token punctuation">*</span></span> .hbs fragments into handlebars templates
+<span class="token list punctuation">-</span> <span class="token italic"><span class="token punctuation">*</span><span class="token content">emit</span><span class="token punctuation">*</span></span> events which can trigger additional processing by plugins
 
 Page-fragments are automatically attached to pages during compilation. This makes it easy for templates to iterate over the fragments in a page during rendering.</code></pre>
 </div>
 </div>
 </div>
-<div id="credit"><p><span class="fa">&#xf004;</span> powered by <a href="https://jldec.github.io/pub-doc/" target="_blank">pub-server</a> and <a href="https://github.com/jldec/pub-theme-doc" target="_blank">pub-theme-doc</a></p>
+<div id="credit"><p><span class="fa">&#xf004;</span> powered by <a href="https://jldec.github.io/pub-doc/" target="_blank" rel="noopener">pub-server</a> and <a href="https://github.com/jldec/pub-theme-doc" target="_blank" rel="noopener">pub-theme-doc</a></p>
 </div>
 </div>
 </div>
@@ -121,6 +121,6 @@ Page-fragments are automatically attached to pages during compilation. This make
 <script>window.pubRef = {"href":"/markdown","relPath":"."};</script>
 <script src="./js/jquery-1.12.4.min.js" ></script>
 <script src="./pub/pub-ux.js" ></script>
-<!-- Copyright (c) 2015-2019 Jürgen Leschner - github.com/jldec - MIT license -->
+<!-- Copyright (c) 2015-2020 Jürgen Leschner - github.com/jldec - MIT license -->
 </body>
 </html>
