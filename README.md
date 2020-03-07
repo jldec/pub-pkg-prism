@@ -1,3 +1,6 @@
+---- / ----
+name: README
+
 # pub-pkg-prism
 
 [pub-server](https://github.com/jldec/pub-server) plugin for syntax highlighting with [prism.js](https://github.com/LeaVerou/prism.git).
