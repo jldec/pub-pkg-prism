@@ -3,32 +3,11 @@ name: README
 
 # pub-pkg-prism
 
-[pub-server](https://github.com/jldec/pub-server) plugin for syntax highlighting with [prism.js](https://github.com/LeaVerou/prism.git).
+[pub-server](https://github.com/jldec/pub-server) plugin for syntax highlighting with [prism.js](https://github.com/LeaVerou/prism.git) v1.26.
 
 Runs inside pub-generator during markdown processing -- no client-side javascript required.
 
-Includes language support for the prism defaults HTML/XML, css, c-like, as well as
-
-- Markup
-- JavaScript
-- C
-- C#
-- Cpp
-- Clojure
-- Docker
-- F#
-- Go
-- Haskell
-- Json
-- Lua
-- Makefile
-- Perl
-- Python
-- R
-- Rust
-- Sql
-- Swift
-- WASM
+Includes language support for markup, css, clike, javascript, c, csharp, cpp, fsharp, go, go-module, handlebars, java, makefile, markdown, markup-templating, perl, php, python, jsx, tsx, ruby, rust, sql, swift, typescript, typoscript, wasm.
 
 A website with some examples can be found at https://jldec.github.io/pub-pkg-prism
 
