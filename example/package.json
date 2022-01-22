@@ -8,7 +8,7 @@
   "author": "Jürgen Leschner",
   "license": "MIT",
   "dependencies": {
-    "pub-pkg-prism": "^2.0.4"
+    "pub-pkg-prism": "^2.0.5"
   },
   "scripts": {
     "develop": "pub",
